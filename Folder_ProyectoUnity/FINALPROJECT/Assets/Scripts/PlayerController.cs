@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.SceneManagement;
+
 
 
 public class PlayerController : MonoBehaviour
 {
     private float _horizontal;
     private float _vertical;
-    private float _rotation = 5f;
+    private float _rotation = 3f;
     [SerializeField] private Rigidbody myRBD;
     [SerializeField] private float velocityModifier = 5f;
 
-    [SerializeField] private GameObject proyectile;
+    //[SerializeField] private GameObject proyectile;
     private Vector3 position;
-    [SerializeField] private Transform _gun;
+    //[SerializeField] private Transform _gun;
     [SerializeField] private ParabolicLaunch parabolicLaunch;
     [SerializeField] private Transform enemy;
     public void OnMovement(InputAction.CallbackContext move)
@@ -25,7 +27,7 @@ public class PlayerController : MonoBehaviour
         position = new Vector3(_horizontal, 0, _vertical);
         if (position != Vector3.zero)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(position), _rotation * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(position), _rotation );
         }
 
     }
@@ -41,31 +43,14 @@ public class PlayerController : MonoBehaviour
         myRBD.velocity = new Vector3(_horizontal * velocityModifier, myRBD.velocity.y, _vertical * velocityModifier);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
     public void DetectEnemy()
     {
         bool hit = false;
-
-
-        //Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-        /*if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitinfo, 10f))
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hitinfo.distance, Color.green);
-            print("hit");
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward)*10f, Color.magenta);
-        }*/
-        if (Physics.Raycast(_gun.position, _gun.TransformDirection(Vector3.forward), out RaycastHit hitinfo, 10f))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitinfo, 10f))
         {
             hit = true;
-            Debug.DrawRay(_gun.position, _gun.TransformDirection(Vector3.forward) * hitinfo.distance, Color.green);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hitinfo.distance, Color.green);
             enemy = hitinfo.transform;
             parabolicLaunch.SetTarget(enemy);
             print("hit");
@@ -81,11 +66,17 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Ray ray = new Ray(transform.position, )
+
     }
-    // Update is called once per frame
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Portal")
+        {
+            SceneManager.LoadScene("Main Game");
+        }
+    }
     void Update()
     {
-        DetectEnemy();
+        //DetectEnemy();
     }
 }
