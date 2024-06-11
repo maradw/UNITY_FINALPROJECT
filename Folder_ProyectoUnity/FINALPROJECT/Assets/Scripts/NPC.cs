@@ -4,34 +4,26 @@ using UnityEngine;
 using DG.Tweening;
 public class NPC : MonoBehaviour
 {
-    [SerializeField] Transform tarjet;
+    [SerializeField] Transform _NPCOrigin;
+    [SerializeField] private float _rePosDuration;
     [SerializeField] float duration;
     [SerializeField] private Ease EaseValue;
-    // Start is called before the first frame update
+    [SerializeField] private Vector3 _height;
+    [SerializeField] private float _jumpPower;
+    [SerializeField] private float _jumpDuration;
+    [SerializeField] private int _jumpsNumb;
+    bool snapping = false;
+    [SerializeField] private Ease EaseParam;
 
-
-    [SerializeField] private float moveTo;
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            //press z
             Sequence NPCSecuence = DOTween.Sequence();
-           // NPCSecuence.Append(transform.DOMoveY(moveTo, 3f, bool snapping)
 
-            NPCSecuence.Append(transform.DOMove(new Vector3(transform.position.x + 6, transform.position.y +3), duration).SetEase(EaseValue));
-            //guardar la posicion para que regrese
+            NPCSecuence.Append( transform.DOJump(_height, _jumpPower,_jumpsNumb, duration, snapping));
+            NPCSecuence.Append(transform.DOMove(_NPCOrigin.position, _rePosDuration, snapping).SetEase(EaseParam));
         }
     }
+    
 }

@@ -6,22 +6,46 @@ using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Transform _titleGame;
-    [SerializeField] private float _effectDuration;
+    [SerializeField] private float _effectTitle;
     [SerializeField] private Transform _newTitlePos;
-    [SerializeField] private float _endPosY = 0f;
+
     [SerializeField] private Ease EaseParam;
     bool snapping = false;
-    [SerializeField] private Rigidbody textRGB;
-    // Start is called before the first frame update
+
+    [SerializeField] private GameObject _audioMenu;
+    [SerializeField] private Transform _audioMenuOrigin;
+    [SerializeField] private Transform _newAudioMenuPOs;
+    [SerializeField] private GameObject _menuButtons;
+    [SerializeField] private float _effectDown;
+    private void Awake()
+    {
+        _audioMenu.SetActive(false);
+    }
     void Start()
     {
-        //_endPosY = transform.position.y + 9;
-        _titleGame.DOMoveY(_newTitlePos.position.y, _effectDuration, snapping).SetEase(EaseParam);
-    }
 
-    // Update is called once per frame
-    void Update()
+        _titleGame.DOMoveY(_newTitlePos.position.y, _effectTitle, snapping).SetEase(EaseParam);
+    }
+    public void ShowAudioSett()
     {
-        
+        _audioMenu.SetActive(true);
+        _menuButtons.SetActive(false);
+        _audioMenu.transform.DOMoveY(_newAudioMenuPOs.position.y, _effectDown, snapping).SetEase(EaseParam);
+    }
+    public void HideAudioSett()
+    {
+        _audioMenu.transform.DOMoveY(_audioMenuOrigin.position.y, _effectDown, snapping).SetEase(EaseParam);
+        _audioMenu.SetActive(false);
+        _menuButtons.SetActive(true);
+
+    }
+    public void Back(GameObject gameBar)
+    {
+        gameBar.SetActive(false);
+    }
+    public void Show(GameObject gameBar)
+    {
+        gameBar.SetActive(true);
+
     }
 }
