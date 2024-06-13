@@ -574,13 +574,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1615074509}
   m_HandleRect: {fileID: 413589277}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 30
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 419288803}
+        m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
+        m_MethodName: SetMusic
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &413589276
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +668,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413589276}
   m_CullTransparentMesh: 1
+--- !u!1 &419288802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 419288804}
+  - component: {fileID: 419288803}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &419288803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419288802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a89589464c1e94fa157129f1578d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioGameMixer: {fileID: 24100000, guid: f2edbfddca6b5314a8536e239b863ac4, type: 2}
+  _volumeData: {fileID: 11400000, guid: dd3f683bae941e2498b191a513c57057, type: 2}
+  _masterSlider: {fileID: 1507695156}
+  _musicSlider: {fileID: 408114273}
+  _SFXSlider: {fileID: 670663251}
+--- !u!4 &419288804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419288802}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.194513, y: 3.4143658, z: 4.1480126}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &443305921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,13 +1727,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 497422744}
   m_HandleRect: {fileID: 623388179}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 30
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 419288803}
+        m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
+        m_MethodName: SetSFX
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &759038835
 GameObject:
   m_ObjectHideFlags: 0
@@ -3235,13 +3308,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 894016630}
   m_HandleRect: {fileID: 850017239}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 30
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 419288803}
+        m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
+        m_MethodName: Setmaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1551036356
 GameObject:
   m_ObjectHideFlags: 0
@@ -4098,7 +4183,8 @@ AudioSource:
   m_GameObject: {fileID: 1867584785}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 571680554004964335, guid: f2edbfddca6b5314a8536e239b863ac4,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 08dce33e7b6fe3c419d22383e0960587, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -5177,3 +5263,4 @@ SceneRoots:
   - {fileID: 380423738}
   - {fileID: 166492719}
   - {fileID: 1172539767}
+  - {fileID: 419288804}

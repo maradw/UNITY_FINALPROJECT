@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private float _horizontal;
+   // public float _runVelocity;
     private float _vertical;
     private float _rotation = 3f;
     [SerializeField] private Rigidbody myRBD;
@@ -34,7 +35,7 @@ public class PlayerController : MonoBehaviour
     public void OnShoot(InputAction.CallbackContext shoot)
     {
         //Instantiate(proyectile, _gun.position, Quaternion.identity);
-        parabolicLaunch.Launch();
+       // parabolicLaunch.Launch();
 
     }
 
