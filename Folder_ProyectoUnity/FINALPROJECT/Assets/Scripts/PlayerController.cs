@@ -19,8 +19,9 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private GameObject proyectile;
     private Vector3 position;
     //[SerializeField] private Transform _gun;
-    [SerializeField] private ParabolicLaunch parabolicLaunch;
-    [SerializeField] private Transform enemy;
+    //[SerializeField] private ParabolicLaunch parabolicLaunch;
+    //[SerializeField] private Transform enemy;
+    public int _playerLife = 50;
     public void OnMovement(InputAction.CallbackContext move)
     {
         _horizontal = move.ReadValue<Vector2>().x;
@@ -50,11 +51,11 @@ public class PlayerController : MonoBehaviour
         bool hit = false;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitinfo, 10f))
         {
-            hit = true;
+            /*hit = true;
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hitinfo.distance, Color.green);
             enemy = hitinfo.transform;
             parabolicLaunch.SetTarget(enemy);
-            print("hit");
+            print("hit");*/
 
         }
         else
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
             hit = false;
             if (hit == false)
             {
-                parabolicLaunch.DeleteTarget();
+                //parabolicLaunch.DeleteTarget();
             }
         }
 
