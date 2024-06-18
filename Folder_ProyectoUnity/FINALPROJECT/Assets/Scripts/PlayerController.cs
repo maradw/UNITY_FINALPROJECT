@@ -10,17 +10,13 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private float _horizontal;
-   // public float _runVelocity;
     private float _vertical;
     private float _rotation = 3f;
     [SerializeField] private Rigidbody myRBD;
     [SerializeField] private float velocityModifier = 5f;
+    [SerializeField] private NPCNavMovement NPC;
 
-    //[SerializeField] private GameObject proyectile;
     private Vector3 position;
-    //[SerializeField] private Transform _gun;
-    //[SerializeField] private ParabolicLaunch parabolicLaunch;
-    //[SerializeField] private Transform enemy;
     public int _playerLife = 50;
     public void OnMovement(InputAction.CallbackContext move)
     {
@@ -35,16 +31,16 @@ public class PlayerController : MonoBehaviour
     }
     public void OnShoot(InputAction.CallbackContext shoot)
     {
-        //Instantiate(proyectile, _gun.position, Quaternion.identity);
-       // parabolicLaunch.Launch();
 
     }
-
+    public void Interact(InputAction.CallbackContext interact)
+    {
+        NPC.CallInteract();
+    }
     public void FixedUpdate()
     {
         myRBD.velocity = new Vector3(_horizontal * velocityModifier, myRBD.velocity.y, _vertical * velocityModifier);
     }
-
 
     public void DetectEnemy()
     {
