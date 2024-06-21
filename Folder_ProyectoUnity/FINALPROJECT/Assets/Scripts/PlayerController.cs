@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Portal")
         {
-            //GameManager.Instance.ChangeScene("Main Game"); //SceneManager.LoadScene("Main Game");
+            GameManager.Instance.ChangeScene("Main Game");
         }
     }
     void Update()
