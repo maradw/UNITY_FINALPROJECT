@@ -5,15 +5,13 @@ using UnityEngine;
 public class ParabolicLaunch : MonoBehaviour
 {
 	[SerializeField] private Rigidbody ball;
-	[SerializeField] private Transform target;
-	[SerializeField] private Transform _gun;
 
 	public float h = 25;
 	public float gravity = -18;
 
 	public bool debugPath;
 
-	void Update()
+	/*void Update()
 	{
 
 	}
@@ -24,25 +22,25 @@ public class ParabolicLaunch : MonoBehaviour
 	public void DeleteTarget()
 	{
 		target = null;
-	}
-	public void Launch()
+	}*/
+	public void Launch(Transform target)
 	{
 		Physics.gravity = Vector3.up * gravity;
 		ball.useGravity = true;
-		ball.velocity = CalculateLaunchData().initialVelocity;
+		ball.velocity = CalculateLaunchData(target).initialVelocity;
 	}
 
-	LaunchData CalculateLaunchData()
+	LaunchData CalculateLaunchData(Transform target)
 	{
-		float displacementY = target.position.y - _gun.position.y;
-		Vector3 displacementXZ = new Vector3(target.position.x - _gun.position.x, 0, target.position.z - _gun.position.z);
+		float displacementY = target.position.y - ball.position.y;
+		Vector3 displacementXZ = new Vector3(target.position.x - ball.position.x, 0, target.position.z - ball.position.z);
 		float time = Mathf.Sqrt(-2 * h / gravity) + Mathf.Sqrt(2 * (displacementY - h) / gravity);
 		Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * h);
 		Vector3 velocityXZ = displacementXZ / time;
 
 		return new LaunchData(velocityXZ + velocityY * -Mathf.Sign(gravity), time);
 	}
-
+	/*
 	void DrawPath()
 	{
 		LaunchData launchData = CalculateLaunchData();
@@ -57,7 +55,7 @@ public class ParabolicLaunch : MonoBehaviour
 			Debug.DrawLine(previousDrawPoint, drawPoint, Color.green);
 			previousDrawPoint = drawPoint;
 		}
-	}
+	}*/
 
 	struct LaunchData
 	{
