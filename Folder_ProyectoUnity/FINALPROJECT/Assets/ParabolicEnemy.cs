@@ -30,8 +30,6 @@ public class ParabolicEnemy : MonoBehaviour
             _playerReference = other.transform;
             _startShooting = true;
             Debug.Log("a");
-            //BallGenerator();
-            //StartCoroutine(StartShoot());
         }
     }
     private void OnTriggerExit(Collider other)
@@ -40,8 +38,6 @@ public class ParabolicEnemy : MonoBehaviour
         {
             _playerReference = null;
             _startShooting = false;
-            //BallGenerator().
-            //StopCoroutine(StartShoot());
         }
     }
     public void Shoot()
@@ -55,14 +51,5 @@ public class ParabolicEnemy : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         _shootAgain = true;
     }
-    /*void CreateBalls()
-    {
-        Instantiate(ball, transform.position, transform.rotation);
-        Invoke("CreateBalls", 1f);
-    }
-    // Update is called once per frame
-    void BallGenerator()
-    {
-        Invoke("CreateBalls", 1f);
-    }*/
+    
 }
