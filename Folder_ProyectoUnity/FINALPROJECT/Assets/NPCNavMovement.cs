@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class NPCNavMovement : MonoBehaviour
 {
 
-    [SerializeField] private Transform[] patrolPoints;
+   /* [SerializeField] private Transform[] patrolPoints;
 
     private int currentPoint = 0;
 
@@ -52,5 +52,5 @@ public class NPCNavMovement : MonoBehaviour
     {
         NPCMovement();
     }
-
+   */
 }

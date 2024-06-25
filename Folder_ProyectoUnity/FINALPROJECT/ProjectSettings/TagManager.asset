@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Conteiner
   - Portal
+  - Green
+  - Red
+  - Blue
+  - Yellow
   layers:
   - Default
   - TransparentFX

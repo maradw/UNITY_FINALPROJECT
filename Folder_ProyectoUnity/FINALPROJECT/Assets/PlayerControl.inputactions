@@ -15,18 +15,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Shoot",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "d3b28842-7038-4c35-b9f5-ed6dd82f33c1",
+                    "id": "bd8f1fe6-7167-4fe1-a8d7-281a37fd164f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "bd8f1fe6-7167-4fe1-a8d7-281a37fd164f",
+                    "id": "1a88f9c5-5bcd-420c-a85d-a97e818289d4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "c2942fae-9eb9-472f-a8de-730d167be4e2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -91,23 +100,34 @@
                 },
                 {
                     "name": "",
-                    "id": "ccaa66c2-98d2-43ba-9a78-2d7ac9d7d443",
-                    "path": "<Keyboard>/space",
+                    "id": "bc5a7b45-7035-4156-a0ff-69107817a127",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "keyboard",
-                    "action": "Shoot",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "bc5a7b45-7035-4156-a0ff-69107817a127",
-                    "path": "<Keyboard>/e",
+                    "id": "72e08201-6d97-43e0-976a-08b931a10b58",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Interact",
+                    "groups": "keyboard",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f6fd56ef-ba54-4cde-a444-9a1aeff210be",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "mouse",
+                    "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -121,6 +141,17 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "mouse",
+            "bindingGroup": "mouse",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": true,
                     "isOR": false
                 }

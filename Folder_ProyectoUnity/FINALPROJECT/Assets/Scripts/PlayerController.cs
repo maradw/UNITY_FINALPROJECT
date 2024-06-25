@@ -15,27 +15,46 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody myRBD;
     [SerializeField] private float velocityModifier = 5f;
     [SerializeField] private NPCNavMovement NPC;
+    public float _gravityScale;
+    public Transform camera;
 
+    public float smoothTime = 0.1f;
+    float smoothVelocity;
     private Vector3 position;
     public int _playerLife = 50;
+    int force = 3;
     public void OnMovement(InputAction.CallbackContext move)
     {
         _horizontal = move.ReadValue<Vector2>().x;
         _vertical = move.ReadValue<Vector2>().y;
-        position = new Vector3(_horizontal, 0, _vertical);
-        if (position != Vector3.zero)
+        position = new Vector3(_horizontal, 0, _vertical).normalized;
+        if (position.magnitude>= 0.1f)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(position), _rotation );
+            float targetAngle = Mathf.Atan2(position.x, position.y) * Mathf.Rad2Deg + camera.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref smoothVelocity, smoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+           // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(position), _rotation );
         }
 
     }
     public void OnShoot(InputAction.CallbackContext shoot)
     {
+        if (shoot.performed)
+        {
 
+        }
     }
     public void Interact(InputAction.CallbackContext interact)
     {
-        NPC.CallInteract();
+       // NPC.CallInteract();
+    }
+    public void Jump(InputAction.CallbackContext jump)
+    {
+        Debug.Log("pressed");
+        myRBD.AddForce(Vector3.up * force, ForceMode.Impulse);
+        //if(myRBD.velocity.y> 0)
+        //funionaxdperomas o menos
+
     }
     public void FixedUpdate()
     {

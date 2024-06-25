@@ -16,7 +16,7 @@ public class navMeshMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(enemy.remainingDistance <= enemy.stoppingDistance)
+        /*if(enemy.remainingDistance <= enemy.stoppingDistance)
         {
             Vector3 target;
             if (RandomPoint(centerPlane.position ,range,out target))
@@ -24,7 +24,7 @@ public class navMeshMovement : MonoBehaviour
                 Debug.DrawRay(target, Vector2.up, Color.magenta, 0.8f);
                 enemy.SetDestination(target);
             }
-        }
+        }*/
     }
     private bool RandomPoint(Vector3 center, float range, out Vector3 result )
     {
