@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
-
-
 public class PlayerController : MonoBehaviour
 {
     private float _horizontal;
@@ -109,6 +106,10 @@ public class PlayerController : MonoBehaviour
                 //parabolicLaunch.DeleteTarget();
             }
         }
+
+    }
+    public void CreateInventory()
+    {
 
     }
     private void OnTriggerEnter(Collider other)

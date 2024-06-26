@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Room.unity
     guid: 70ee925fa76b1b84ca51f0cac01286ba
   - enabled: 1
+    path: Assets/Scenes/Roulette.unity
+    guid: 50bfe240833f1ba4b94813c020f30b8e
+  - enabled: 1
     path: Assets/Scenes/Main Game.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects: {}

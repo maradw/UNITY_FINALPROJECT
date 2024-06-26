@@ -6,8 +6,8 @@ public class Roulette : MonoBehaviour
 {
     private bool _isRotating = false;
     [SerializeField] float speed;
-    [SerializeField] GameObject button;
-
+    [SerializeField] GameObject startRotate;
+    [SerializeField] GameObject NextScene;
 
     //MRUV
     [SerializeField] private float startTime;
@@ -23,7 +23,7 @@ public class Roulette : MonoBehaviour
     public void Cliked()
     {
         _isRotating = true;
-        button.SetActive(false);
+        startRotate.SetActive(false);
 
         currentTime = Time.time - startTime;
         result = initialVelocity * currentTime + (acceleration * Mathf.Pow(currentTime, 2) / 2);
@@ -36,11 +36,15 @@ public class Roulette : MonoBehaviour
         
 
         CallStopRotate();
+        //if()
         
+
+        CallHide();
     }
     private void Start()
     {
         startTime = Time.time;
+        NextScene.SetActive(false);
     }
     void Update()
     {
@@ -66,4 +70,19 @@ public class Roulette : MonoBehaviour
     {
         StartCoroutine(StopRotate(5f));
     }
+    IEnumerator HideAndPass()
+    {
+        yield return new WaitForSeconds(8f);
+        NextScene.SetActive(true);
+
+    }
+    public void CallHide()
+    {
+        StartCoroutine(HideAndPass());
+    }
+     public void Continue(string scene)
+    {
+        GameManager.Instance.ChangeScene(scene);
+    }
 }
+
