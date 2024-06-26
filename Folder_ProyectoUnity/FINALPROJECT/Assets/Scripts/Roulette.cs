@@ -14,7 +14,6 @@ public class Roulette : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float result;
     [SerializeField] private float initialVelocity;
-
     [SerializeField] public float currentTime = 0;
 
 

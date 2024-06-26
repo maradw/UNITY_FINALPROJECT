@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float TargetAngle;
 
 
-    [SerializeField]Vector3 xd;
+    
 
     private void CameraAngles()
     {
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         //Vector3 moveDirection = new Vector3(direction.x, myRBD.velocity.y, direction.y).normalized;
         //myRBD.velocity = cameraRef.TransformDirection(moveDirection) * velocityModifier;
         //RBVelocity = myRBD.velocity;
-        xd = myRBD.velocity;
+        
     }
 
     public void DetectEnemy()
