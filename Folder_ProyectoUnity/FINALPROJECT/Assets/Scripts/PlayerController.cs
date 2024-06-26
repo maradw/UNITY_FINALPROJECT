@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
 using UnityEngine.SceneManagement;
 
 
@@ -11,31 +10,43 @@ public class PlayerController : MonoBehaviour
 {
     private float _horizontal;
     private float _vertical;
-    private float _rotation = 3f;
+    //private float _rotation = 3f;
     [SerializeField] private Rigidbody myRBD;
     [SerializeField] private float velocityModifier = 5f;
-    [SerializeField] private NPCNavMovement NPC;
+    //[SerializeField] private NPCNavMovement NPC;
     public float _gravityScale;
-    public Transform camera;
+    public Transform cameraRef;
 
     public float smoothTime = 0.1f;
     float smoothVelocity;
-    private Vector3 position;
+    
     public int _playerLife = 50;
     int force = 3;
+
+    [Header("Anlges Rotations")]
+    [SerializeField] private Quaternion CameraRotaiton;
+    [SerializeField] private Quaternion PlayerRotation;
+    [SerializeField] private Vector3 RBVelocity;
+    [SerializeField] private Vector3 direction;
+    [SerializeField] private float positionMagnitud;
+    [SerializeField] private float ConstAngle;
+    [SerializeField] private float TargetAngle;
+
+
+    [SerializeField]Vector3 xd;
+
+    private void CameraAngles()
+    {
+        TargetAngle = Mathf.Atan2(direction.x, direction.y)* Mathf.Rad2Deg + cameraRef.eulerAngles.y;
+        ConstAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TargetAngle, ref smoothVelocity, smoothTime);
+        transform.rotation = Quaternion.Euler(0f, ConstAngle, 0f);
+    }
+
     public void OnMovement(InputAction.CallbackContext move)
     {
-        _horizontal = move.ReadValue<Vector2>().x;
-        _vertical = move.ReadValue<Vector2>().y;
-        position = new Vector3(_horizontal, 0, _vertical).normalized;
-        if (position.magnitude>= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(position.x, position.y) * Mathf.Rad2Deg + camera.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref smoothVelocity, smoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-           // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(position), _rotation );
-        }
+        direction = move.ReadValue<Vector2>();
 
+        positionMagnitud = direction.magnitude;
     }
     public void OnShoot(InputAction.CallbackContext shoot)
     {
@@ -58,7 +69,23 @@ public class PlayerController : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        myRBD.velocity = new Vector3(_horizontal * velocityModifier, myRBD.velocity.y, _vertical * velocityModifier);
+        /*if (direction.magnitude >= 0.1f)
+        {
+            CameraAngles();
+        }
+
+        CameraRotaiton = camera.rotation;
+        PlayerRotation = transform.rotation;*/
+
+        //myRBD.velocity = new Vector3(-_horizontal  * Mathf.Cos(ConstAngle * Mathf.Deg2Rad) * velocityModifier, myRBD.velocity.y, _vertical  * Mathf.Sin(ConstAngle * Mathf.Deg2Rad) * velocityModifier);
+        //RBVelocity = myRBD.velocity;
+
+        //myRBD.velocity = new Vector3(_horizontal * velocityModifier, 0, _vertical * velocityModifier) * Vector3.Dot(myRBD.velocity.normalized, myRBD.transform.forward);
+        myRBD.velocity = new Vector3(cameraRef.TransformDirection(direction).x * velocityModifier, myRBD.velocity.y, cameraRef.TransformDirection(direction).z * velocityModifier);//Maria
+        //Vector3 moveDirection = new Vector3(direction.x, myRBD.velocity.y, direction.y).normalized;
+        //myRBD.velocity = cameraRef.TransformDirection(moveDirection) * velocityModifier;
+        //RBVelocity = myRBD.velocity;
+        xd = myRBD.velocity;
     }
 
     public void DetectEnemy()
@@ -82,7 +109,6 @@ public class PlayerController : MonoBehaviour
                 //parabolicLaunch.DeleteTarget();
             }
         }
-
 
     }
     private void OnTriggerEnter(Collider other)

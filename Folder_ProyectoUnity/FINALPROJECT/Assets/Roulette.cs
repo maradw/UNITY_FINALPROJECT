@@ -4,31 +4,56 @@ using UnityEngine;
 
 public class Roulette : MonoBehaviour
 {
-    bool _isRotating = false;
-    float _rotationSpeed;
+    private bool _isRotating = false;
+    [SerializeField] float speed;
     [SerializeField] GameObject button;
-    void Start()
-    {
-        
-    }
-    public void ButtonCliked()
+
+
+    //MRUV
+    [SerializeField] private float startTime;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float result;
+    [SerializeField] private float initialVelocity;
+
+    [SerializeField] public float currentTime = 0;
+
+
+    //[SerializeField] Rigidbody _rouletteRBD;
+
+    public void Cliked()
     {
         _isRotating = true;
-
         button.SetActive(false);
+
+        currentTime = Time.time - startTime;
+        result = initialVelocity * currentTime + (acceleration * Mathf.Pow(currentTime, 2) / 2);
+        // if(Time.deltaTime <= 0)
+        {
+            transform.Rotate(Vector3.back * Time.deltaTime * speed);
+        }
+       // transform.Rotate(Vector3.back * Time.deltaTime * speed);
+        
+        
+
         CallStopRotate();
         
     }
+    private void Start()
+    {
+        startTime = Time.time;
+    }
     void Update()
     {
-        if(_isRotating == true)
+        
+        if (_isRotating == true)
         {
-            transform.Rotate( Vector3.back * _rotationSpeed * Time.deltaTime);
+           this.gameObject.transform.Rotate(Vector3.back * result * Time.deltaTime);
+          
         }
     }
     void Rotate()
     {
-        _isRotating = false;
+       _isRotating = false;
     }
     IEnumerator StopRotate(float time)
     {
