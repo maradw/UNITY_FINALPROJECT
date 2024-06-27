@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
     [SerializeField] private Transform _titleGame;
     [SerializeField] private float _effectTitle;
     [SerializeField] private Transform _newTitlePos;
@@ -20,6 +21,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float _effectDown;
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+
+
         _audioMenu.SetActive(false);
     }
     void Start()

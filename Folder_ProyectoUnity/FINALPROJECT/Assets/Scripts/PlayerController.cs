@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         //RBVelocity = myRBD.velocity;
 
         //myRBD.velocity = new Vector3(_horizontal * velocityModifier, 0, _vertical * velocityModifier) * Vector3.Dot(myRBD.velocity.normalized, myRBD.transform.forward);
-        myRBD.velocity = new Vector3(cameraRef.TransformDirection(direction).x * velocityModifier, myRBD.velocity.y, cameraRef.TransformDirection(direction).z * velocityModifier);//Maria
+        myRBD.velocity = new Vector3(cameraRef.TransformDirection(direction).x * velocityModifier, myRBD.velocity.y, cameraRef.TransformDirection(direction).y * velocityModifier);//Maria
         //Vector3 moveDirection = new Vector3(direction.x, myRBD.velocity.y, direction.y).normalized;
         //myRBD.velocity = cameraRef.TransformDirection(moveDirection) * velocityModifier;
         //RBVelocity = myRBD.velocity;
@@ -90,11 +90,11 @@ public class PlayerController : MonoBehaviour
         bool hit = false;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitinfo, 10f))
         {
-            /*hit = true;
+            hit = true;
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hitinfo.distance, Color.green);
-            enemy = hitinfo.transform;
-            parabolicLaunch.SetTarget(enemy);
-            print("hit");*/
+            //enemy = hitinfo.transform;
+           // parabolicLaunch.SetTarget(enemy);
+            print("hit");
 
         }
         else
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
             hit = false;
             if (hit == false)
             {
-                //parabolicLaunch.DeleteTarget();
+
             }
         }
 
@@ -118,9 +118,13 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.ChangeScene("Main Game");
         }
+        else if (other.tag == "ChozuyaTalk")
+        {
+
+        }
     }
     void Update()
     {
-        //DetectEnemy();
+        DetectEnemy();
     }
 }

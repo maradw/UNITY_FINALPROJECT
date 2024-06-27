@@ -6,13 +6,21 @@ using UnityEngine.InputSystem;
 public class DialogueSystem : MonoBehaviour
 {
     [SerializeField] private Text _text;
+    [SerializeField] private GameObject _dialogueBar;
     public string[] dialogueText;
     public float timeBetween = 0.15f;
     // Start is called before the first frame update
+    private void Awake()
+    {
+       // DontDestroyOnLoad(this.gameObject);
+    }
     void Start()
     {
+
         _text = GetComponent<Text>();
         _text.text = " ";
+
+       // UIManager.Instance.Back(_dialogueBar);
     }
     public void OnTalk(InputAction.CallbackContext talk)
     {
@@ -23,6 +31,7 @@ public class DialogueSystem : MonoBehaviour
     {
         
     }
+
     private IEnumerator Displaytext(string text)
     {
         int textLenght = text.Length;
