@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+using System;
+//using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private float _horizontal;
@@ -16,7 +17,9 @@ public class PlayerController : MonoBehaviour
 
     public float smoothTime = 0.1f;
     float smoothVelocity;
-    
+
+    public static event Action OnPlayerGather;
+    public static event Action<int> OnPlayerDamage;
     public int _playerLife = 50;
     int force = 3;
 
@@ -88,7 +91,7 @@ public class PlayerController : MonoBehaviour
     public void DetectEnemy()
     {
         bool hit = false;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitinfo, 10f))
+        /*if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitinfo, 10f))
         {
             hit = true;
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hitinfo.distance, Color.green);
@@ -105,7 +108,7 @@ public class PlayerController : MonoBehaviour
             {
 
             }
-        }
+        }*/
 
     }
     public void CreateInventory()
@@ -117,11 +120,21 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Portal")
         {
             GameManager.Instance.ChangeScene("Main Game");
+            Debug.Log("help");
+        }
+        else if (other.tag == "Book")
+        {
+            OnPlayerGather?.Invoke();
+        }
+        else if (other.tag == "Damage")
+        {
+            OnPlayerDamage?.Invoke(6);
         }
         else if (other.tag == "ChozuyaTalk")
         {
-
+            Debug.Log("a");
         }
+        
     }
     void Update()
     {
