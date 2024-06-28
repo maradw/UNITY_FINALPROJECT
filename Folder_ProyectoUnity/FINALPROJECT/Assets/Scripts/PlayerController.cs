@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float TargetAngle;
 
 
-    
+    private float jumpForce = 5f;
+    private Vector3 forceDirection = Vector3.zero;
 
     private void CameraAngles()
     {
@@ -61,11 +62,24 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext jump)
     {
-        Debug.Log("pressed");
-        myRBD.AddForce(Vector3.up * force, ForceMode.Impulse);
+        /*Debug.Log("pressed");
+        myRBD.AddForce(Vector3.up * force, ForceMode.Impulse);*/
         //if(myRBD.velocity.y> 0)
         //funionaxdperomas o menos
-
+        Debug.Log("ekisde");
+        if (IsGrounded())
+        {
+            forceDirection += Vector3.up * jumpForce;
+            Debug.Log("ekisde2");
+        }
+    }
+    private bool IsGrounded()
+    {
+        Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
+            return true;
+        else
+            return false;
     }
     public void FixedUpdate()
     {
@@ -81,11 +95,22 @@ public class PlayerController : MonoBehaviour
         //RBVelocity = myRBD.velocity;
 
         //myRBD.velocity = new Vector3(_horizontal * velocityModifier, 0, _vertical * velocityModifier) * Vector3.Dot(myRBD.velocity.normalized, myRBD.transform.forward);
+
+
+
+        //xd
+
         myRBD.velocity = new Vector3(cameraRef.TransformDirection(direction).x * velocityModifier, myRBD.velocity.y, cameraRef.TransformDirection(direction).y * velocityModifier);//Maria
+
+        //xd
+
         //Vector3 moveDirection = new Vector3(direction.x, myRBD.velocity.y, direction.y).normalized;
         //myRBD.velocity = cameraRef.TransformDirection(moveDirection) * velocityModifier;
         //RBVelocity = myRBD.velocity;
-        
+
+
+
+        //myRBD.velocity = new Vector3(_horizontal * velocityModifier, myRBD.velocity.y, _vertical * velocityModifier);
     }
 
     public void DetectEnemy()
@@ -122,15 +147,18 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.ChangeScene("Main Game");
             Debug.Log("help");
         }
-        else if (other.tag == "Book")
+
+        if (other.tag == "Book")
         {
             OnPlayerGather?.Invoke();
         }
-        else if (other.tag == "Damage")
+
+        if (other.tag == "TilinInsano666")
         {
             OnPlayerDamage?.Invoke(6);
         }
-        else if (other.tag == "ChozuyaTalk")
+
+        if (other.tag == "ChozuyaTalk")
         {
             Debug.Log("a");
         }
@@ -139,5 +167,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         DetectEnemy();
+        CameraAngles();
     }
 }
