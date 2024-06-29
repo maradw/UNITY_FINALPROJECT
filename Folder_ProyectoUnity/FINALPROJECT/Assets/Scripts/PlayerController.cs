@@ -155,7 +155,12 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag == "TilinInsano666")
         {
-            OnPlayerDamage?.Invoke(6);
+            Restlife(10);
+            //OnPlayerDamage?.Invoke(6);
+        }
+        else if(other.tag == "Damage")
+        {
+            Restlife(8);
         }
 
         if (other.tag == "ChozuyaTalk")
@@ -164,9 +169,23 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+
+    private void Restlife(int damage)
+    {
+        _playerLife -= damage;
+    }
     void Update()
     {
         DetectEnemy();
         CameraAngles();
+        LifeStatus();
+    }
+    private void LifeStatus()
+    {
+        if (_playerLife <= 0)
+        {
+            Debug.Log("lose");
+            GameManager.Instance.ChangeScene("Menu");
+        }
     }
 }

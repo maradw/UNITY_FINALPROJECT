@@ -31,7 +31,7 @@ public class PlayerController2 : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext jump)
     {
-        Debug.Log("pressed");
+        /*Debug.Log("pressed");
         //myRBD.AddForce(Vector3.up * force, ForceMode.Impulse);
         //if(myRBD.velocity.y> 0)
         //funionaxdperomas o menos
@@ -40,16 +40,16 @@ public class PlayerController2 : MonoBehaviour
         {
             forceDirection += Vector3.up * jumpForce;
             Debug.Log("ekisde2");
-        }
+        }*/
     }
-    private bool IsGrounded()
+    /*private bool IsGrounded()
     {
         Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
         if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
             return true;
         else
             return false;
-    }
+    }*/
     // Update is called once per frame
     void Update()
     {
@@ -94,5 +94,10 @@ public class PlayerController2 : MonoBehaviour
             GameManager.Instance.ChangeScene("Main Game");
             Debug.Log("help");
         }
+       // if (other.tag == "Damage")
+        {
+
+        }
     }
+    
 }
