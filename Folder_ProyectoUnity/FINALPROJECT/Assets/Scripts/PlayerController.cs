@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Portal")
         {
-            GameManager.Instance.ChangeScene("Main Game");
+            GameManager.Instance.ChangeScene("Roulette");
             Debug.Log("help");
         }
 

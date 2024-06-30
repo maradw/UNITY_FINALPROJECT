@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BookControllerDef : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private BookSO _bookInfo;
     void Start()
     {
         

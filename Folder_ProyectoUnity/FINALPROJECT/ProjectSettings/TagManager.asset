@@ -14,6 +14,7 @@ TagManager:
   - Book
   - TilinInsano666
   - Damage
+  - Pin
   layers:
   - Default
   - TransparentFX

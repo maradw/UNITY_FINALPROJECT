@@ -5,44 +5,27 @@ using UnityEngine;
 public class Roulette : MonoBehaviour
 {
     private bool _isRotating = false;
-    [SerializeField] float speed;
+    [SerializeField] float speed =5;
     [SerializeField] GameObject startRotate;
     [SerializeField] GameObject NextScene;
 
     //MRUV
-    [SerializeField] private float startTime;
     [SerializeField] private float acceleration;
     [SerializeField] private float result;
     [SerializeField] private float initialVelocity;
-    [SerializeField] public float currentTime = 0;
-
-
-    //[SerializeField] Rigidbody _rouletteRBD;
+    private int _rotationTime = 5;
 
     public void Cliked()
     {
         _isRotating = true;
         startRotate.SetActive(false);
 
-        currentTime = Time.time - startTime;
-        result = initialVelocity * currentTime + (acceleration * Mathf.Pow(currentTime, 2) / 2);
-        // if(Time.deltaTime <= 0)
-        {
-            transform.Rotate(Vector3.back * Time.deltaTime * speed);
-        }
-       // transform.Rotate(Vector3.back * Time.deltaTime * speed);
-        
-        
-
+        result = initialVelocity * _rotationTime + (acceleration * Mathf.Pow(_rotationTime, 2) / 2);
         CallStopRotate();
-        //if()
-        
-
         CallHide();
     }
     private void Start()
     {
-        startTime = Time.time;
         NextScene.SetActive(false);
     }
     void Update()
@@ -67,11 +50,11 @@ public class Roulette : MonoBehaviour
     }
     public void CallStopRotate()
     {
-        StartCoroutine(StopRotate(5f));
+        StartCoroutine(StopRotate(_rotationTime));
     }
     IEnumerator HideAndPass()
     {
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(_rotationTime+0.5f);
         NextScene.SetActive(true);
 
     }
@@ -81,7 +64,7 @@ public class Roulette : MonoBehaviour
     }
      public void Continue(string scene)
     {
-        GameManager.Instance.ChangeScene(scene);
+        GameManager.Instance.ChangeScene("Main game");
     }
 }
 
