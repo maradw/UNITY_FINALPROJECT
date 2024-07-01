@@ -1,13 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BookControllerDef : MonoBehaviour
 {
     [SerializeField] private BookSO _bookInfo;
+    [SerializeField] private int _order;
+
     void Start()
     {
-        
+        //_myParticleSys = _bookInfo._bookPart;
+        _order = _bookInfo._bookNumb;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -16,9 +18,5 @@ public class BookControllerDef : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

@@ -24,7 +24,11 @@ public class DialogueSystem : MonoBehaviour
     }
     public void OnTalk(InputAction.CallbackContext talk)
     {
-        StartCoroutine(Displaytext(dialogueText[0]));                            
+        if (talk.performed)
+        {
+            StartCoroutine(Displaytext(dialogueText[0]));
+        }
+                                  
     }
     // Update is called once per frame
     void Update()
@@ -49,7 +53,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 break;
             }
-            _text.text = " ";
+           // _text.text = " ";
 
         }
     }

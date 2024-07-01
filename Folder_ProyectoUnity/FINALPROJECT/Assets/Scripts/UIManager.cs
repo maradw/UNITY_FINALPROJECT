@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-
+       // DontDestroyOnLoad(this);
         _audioMenu.SetActive(false);
     }
     void Start()

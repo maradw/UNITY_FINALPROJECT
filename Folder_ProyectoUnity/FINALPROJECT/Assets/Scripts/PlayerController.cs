@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
@@ -24,30 +23,32 @@ public class PlayerController : MonoBehaviour
     int force = 3;
 
     [Header("Anlges Rotations")]
-    [SerializeField] private Quaternion CameraRotaiton;
+    /*[SerializeField] private Quaternion CameraRotaiton;
     [SerializeField] private Quaternion PlayerRotation;
-    [SerializeField] private Vector3 RBVelocity;
+    [SerializeField] private Vector3 RBVelocity;*/
     [SerializeField] private Vector3 direction;
-    [SerializeField] private float positionMagnitud;
+
+    /*[SerializeField] private float positionMagnitud;
     [SerializeField] private float ConstAngle;
-    [SerializeField] private float TargetAngle;
+    [SerializeField] private float TargetAngle;*/
 
-
+    private bool _canJump;
     private float jumpForce = 5f;
     private Vector3 forceDirection = Vector3.zero;
+    private RaycastHit _rayHit1;
+    [SerializeField] private LayerMask layer;
+    [SerializeField] private float _rayLenght;
+    [SerializeField] private Transform _refMovement;
 
-    private void CameraAngles()
+    void Start()
     {
-        TargetAngle = Mathf.Atan2(direction.x, direction.y)* Mathf.Rad2Deg + cameraRef.eulerAngles.y;
-        ConstAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, TargetAngle, ref smoothVelocity, smoothTime);
-        transform.rotation = Quaternion.Euler(0f, ConstAngle, 0f);
+        _canJump = true;
     }
 
     public void OnMovement(InputAction.CallbackContext move)
     {
-        direction = move.ReadValue<Vector2>();
+        direction = move.ReadValue<Vector3>();
 
-        positionMagnitud = direction.magnitude;
     }
     public void OnShoot(InputAction.CallbackContext shoot)
     {
@@ -62,66 +63,41 @@ public class PlayerController : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext jump)
     {
-        /*Debug.Log("pressed");
-        myRBD.AddForce(Vector3.up * force, ForceMode.Impulse);*/
-        //if(myRBD.velocity.y> 0)
-        //funionaxdperomas o menos
-        Debug.Log("ekisde");
-        if (IsGrounded())
-        {
-            forceDirection += Vector3.up * jumpForce;
-            Debug.Log("ekisde2");
-        }
+       if(jump.performed && _canJump == true)
+       {
+            myRBD.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            _canJump = false;
+
+       }
+
     }
-    private bool IsGrounded()
-    {
-        Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
-            return true;
-        else
-            return false;
-    }
+
     public void FixedUpdate()
     {
-        /*if (direction.magnitude >= 0.1f)
+        myRBD.velocity = new Vector3(_refMovement.TransformDirection(direction).normalized.x * velocityModifier, myRBD.velocity.y, _refMovement.TransformDirection(direction).normalized.z * velocityModifier);
+        transform.rotation = Quaternion.LookRotation(_refMovement.TransformDirection(Vector3.forward));
+        _refMovement.rotation = new Quaternion(0, cameraRef.rotation.y, 0, cameraRef.rotation.w);
+        if (Physics.Raycast(transform.position, Vector3.down, out _rayHit1, _rayLenght, layer))
         {
-            CameraAngles();
+            Debug.DrawRay(transform.position, Vector3.down * _rayHit1.distance, Color.magenta);
+            _canJump = true;
+            Debug.Log("jump");
         }
-
-        CameraRotaiton = camera.rotation;
-        PlayerRotation = transform.rotation;*/
-
-        //myRBD.velocity = new Vector3(-_horizontal  * Mathf.Cos(ConstAngle * Mathf.Deg2Rad) * velocityModifier, myRBD.velocity.y, _vertical  * Mathf.Sin(ConstAngle * Mathf.Deg2Rad) * velocityModifier);
-        //RBVelocity = myRBD.velocity;
-
-        //myRBD.velocity = new Vector3(_horizontal * velocityModifier, 0, _vertical * velocityModifier) * Vector3.Dot(myRBD.velocity.normalized, myRBD.transform.forward);
-
-
-
-        //xd
-
-        myRBD.velocity = new Vector3(cameraRef.TransformDirection(direction).x * velocityModifier, myRBD.velocity.y, cameraRef.TransformDirection(direction).y * velocityModifier);//Maria
-
-        //xd
-
-        //Vector3 moveDirection = new Vector3(direction.x, myRBD.velocity.y, direction.y).normalized;
-        //myRBD.velocity = cameraRef.TransformDirection(moveDirection) * velocityModifier;
-        //RBVelocity = myRBD.velocity;
-
-
-
-        //myRBD.velocity = new Vector3(_horizontal * velocityModifier, myRBD.velocity.y, _vertical * velocityModifier);
+        else
+        {
+            Debug.DrawRay(transform.position, Vector3.down * _rayLenght, Color.green);
+            Debug.Log("nose");
+        }
     }
 
     public void DetectEnemy()
     {
         bool hit = false;
-        /*if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitinfo, 10f))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out RaycastHit hitinfo, 10f))
         {
             hit = true;
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hitinfo.distance, Color.green);
-            //enemy = hitinfo.transform;
-           // parabolicLaunch.SetTarget(enemy);
+
             print("hit");
 
         }
@@ -133,7 +109,7 @@ public class PlayerController : MonoBehaviour
             {
 
             }
-        }*/
+        }
 
     }
     public void CreateInventory()
@@ -145,7 +121,7 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Portal")
         {
             GameManager.Instance.ChangeScene("Roulette");
-            Debug.Log("help");
+
         }
 
         if (other.tag == "Book")
@@ -153,31 +129,29 @@ public class PlayerController : MonoBehaviour
             OnPlayerGather?.Invoke();
         }
 
-        if (other.tag == "TilinInsano666")
-        {
-            Restlife(10);
-            //OnPlayerDamage?.Invoke(6);
-        }
-        else if(other.tag == "Damage")
-        {
-            Restlife(8);
-        }
-
+        
         if (other.tag == "ChozuyaTalk")
         {
             Debug.Log("a");
         }
         
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Damage")
+        {
+            Restlife(6);
+        }
 
+    }
     private void Restlife(int damage)
     {
         _playerLife -= damage;
     }
     void Update()
     {
-        DetectEnemy();
-        CameraAngles();
+        
+        //DetectEnemy();
         LifeStatus();
     }
     private void LifeStatus()

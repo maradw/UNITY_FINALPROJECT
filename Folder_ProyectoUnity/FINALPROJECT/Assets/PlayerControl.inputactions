@@ -9,7 +9,7 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "7b6d97a0-d2f2-4a2b-b01b-76f94743b188",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -62,9 +62,9 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "3D Vector",
                     "id": "9ee72c9d-d31e-488c-ba01-07570e30f667",
-                    "path": "2DVector",
+                    "path": "3DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -73,29 +73,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "7bd797a2-7bc9-4394-a78a-30771273f134",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse and Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "248db5d2-44e0-4445-970c-3bd0bcfb278f",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse and Keyboard",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
+                    "name": "Left",
                     "id": "77a70d9f-de55-4949-8539-9e5fd2457cea",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -106,12 +84,34 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
+                    "name": "Right",
                     "id": "13e475e8-4b8a-422d-99f8-6867c315469b",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Forward",
+                    "id": "4b6c2f25-e845-4a5a-910c-75628674cd5a",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Backward",
+                    "id": "1da4e73b-a952-4b76-852f-a2ef843c3105",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true

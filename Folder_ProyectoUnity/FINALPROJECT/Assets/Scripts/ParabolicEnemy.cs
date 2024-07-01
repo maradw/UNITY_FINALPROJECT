@@ -16,13 +16,7 @@ public class ParabolicEnemy : MonoBehaviour
             StartCoroutine(StartShoot());
         }
     }
-    public void ShootIn2D()
-    {
-        if (_startShooting == true && _shootAgain == true)
-        {
-            StartCoroutine(StartShoot());
-        }
-    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")

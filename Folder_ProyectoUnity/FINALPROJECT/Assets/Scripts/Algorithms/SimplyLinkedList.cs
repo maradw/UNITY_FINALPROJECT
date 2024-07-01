@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-
 public class SimplyLinkedList<T>
 {
     class Node
@@ -342,10 +341,4 @@ public class SimplyLinkedList<T>
     }
 }
 
-class Program
-{
-    static void Main(string[] args)
-    {
 
-    }
-}

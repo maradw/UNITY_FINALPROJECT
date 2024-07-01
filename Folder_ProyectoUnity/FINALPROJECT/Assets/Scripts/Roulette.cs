@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Roulette : MonoBehaviour
 {
     private bool _isRotating = false;
-    [SerializeField] float speed =5;
+    [SerializeField] private float speed;
     [SerializeField] GameObject startRotate;
     [SerializeField] GameObject NextScene;
 
@@ -13,8 +12,12 @@ public class Roulette : MonoBehaviour
     [SerializeField] private float acceleration;
     [SerializeField] private float result;
     [SerializeField] private float initialVelocity;
-    private int _rotationTime = 5;
-
+    private int _rotationTime;
+    private void Awake()
+    {
+        speed = Random.Range(4f, 10f);
+        _rotationTime = Random.Range(5, 8);
+    }
     public void Cliked()
     {
         _isRotating = true;
@@ -45,8 +48,6 @@ public class Roulette : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         Rotate();
-
-
     }
     public void CallStopRotate()
     {
