@@ -8,14 +8,13 @@ public class PlayerController : MonoBehaviour
     private float _horizontal;
     private float _vertical;
     //private float _rotation = 3f;
-    [SerializeField] private Rigidbody myRBD;
+    private Rigidbody myRBD;
     [SerializeField] private float velocityModifier = 5f;
-    //[SerializeField] private NPCNavMovement NPC;
-    public float _gravityScale;
+    //[SerializeField] private NPCNavMovement NPC
     public Transform cameraRef;
 
-    public float smoothTime = 0.1f;
-    float smoothVelocity;
+    //public float smoothTime = 0.1f;
+    //float smoothVelocity;
 
     public static event Action OnPlayerGather;
     public static event Action<int> OnPlayerDamage;
@@ -33,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float TargetAngle;*/
 
     private bool _canJump;
-    private float jumpForce = 5f;
+    private float jumpForce = 7.5f;
    // private Vector3 forceDirection = Vector3.zero;
     private RaycastHit _rayHit1;
     [SerializeField] private LayerMask layer;
@@ -43,6 +42,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _canJump = true;
+        myRBD = GetComponent<Rigidbody>();
     }
 
     public void OnMovement(InputAction.CallbackContext move)
