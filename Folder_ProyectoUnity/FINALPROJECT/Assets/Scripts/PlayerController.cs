@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     private bool _canJump;
     private float jumpForce = 5f;
-    private Vector3 forceDirection = Vector3.zero;
+   // private Vector3 forceDirection = Vector3.zero;
     private RaycastHit _rayHit1;
     [SerializeField] private LayerMask layer;
     [SerializeField] private float _rayLenght;
@@ -77,16 +77,18 @@ public class PlayerController : MonoBehaviour
         myRBD.velocity = new Vector3(_refMovement.TransformDirection(direction).normalized.x * velocityModifier, myRBD.velocity.y, _refMovement.TransformDirection(direction).normalized.z * velocityModifier);
         transform.rotation = Quaternion.LookRotation(_refMovement.TransformDirection(Vector3.forward));
         _refMovement.rotation = new Quaternion(0, cameraRef.rotation.y, 0, cameraRef.rotation.w);
+
+
         if (Physics.Raycast(transform.position, Vector3.down, out _rayHit1, _rayLenght, layer))
         {
             Debug.DrawRay(transform.position, Vector3.down * _rayHit1.distance, Color.magenta);
             _canJump = true;
-            Debug.Log("jump");
+
         }
         else
         {
             Debug.DrawRay(transform.position, Vector3.down * _rayLenght, Color.green);
-            Debug.Log("nose");
+
         }
     }
 
