@@ -15,6 +15,7 @@ TagManager:
   - Damage
   - Pin
   - Ground
+  - Node
   layers:
   - Default
   - TransparentFX

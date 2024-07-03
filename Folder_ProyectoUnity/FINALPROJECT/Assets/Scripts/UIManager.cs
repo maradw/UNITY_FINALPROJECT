@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform _targetCred;
     [SerializeField] private GameObject _creditsBar;
     [SerializeField] private TextMeshProUGUI _names;
-    private float _effectUp =3f;
+    //private float _effectUp =f;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
     {
         _creditsBar.SetActive(true);
         _menuButtons.SetActive(false);
-        _names.transform.DOMoveY(_targetCred.position.y, _effectUp, snapping).SetEase(EaseParam);
+        _names.transform.DOMoveY(_targetCred.position.y, _effectDown, snapping).SetEase(EaseParam);
 
     }
     public void ShowAudioSett()
