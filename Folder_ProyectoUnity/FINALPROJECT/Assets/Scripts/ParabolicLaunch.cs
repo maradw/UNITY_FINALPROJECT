@@ -11,18 +11,6 @@ public class ParabolicLaunch : MonoBehaviour
 
 	public bool debugPath;
 
-	/*void Update()
-	{
-
-	}
-	public void SetTarget(Transform newTarget)
-	{
-		target = newTarget;
-	}
-	public void DeleteTarget()
-	{
-		target = null;
-	}*/
 	public void Launch(Transform target)
 	{
 		Physics.gravity = Vector3.up * gravity;
@@ -40,24 +28,15 @@ public class ParabolicLaunch : MonoBehaviour
 
 		return new LaunchData(velocityXZ + velocityY * -Mathf.Sign(gravity), time);
 	}
-	/*
-	void DrawPath()
-	{
-		LaunchData launchData = CalculateLaunchData();
-		Vector3 previousDrawPoint = _gun.position;
-
-		int resolution = 30;
-		for (int i = 1; i <= resolution; i++)
+    private void OnTriggerEnter(Collider other)
+    {
+		if (other.tag == "Ground" ||other.tag == "Player")
 		{
-			float simulationTime = i / (float)resolution * launchData.timeToTarget;
-			Vector3 displacement = launchData.initialVelocity * simulationTime + Vector3.up * gravity * simulationTime * simulationTime / 2f;
-			Vector3 drawPoint = _gun.position + displacement;
-			Debug.DrawLine(previousDrawPoint, drawPoint, Color.green);
-			previousDrawPoint = drawPoint;
+			Destroy(this.gameObject);
 		}
-	}*/
+	}
 
-	struct LaunchData
+    struct LaunchData
 	{
 		public readonly Vector3 initialVelocity;
 		public readonly float timeToTarget;

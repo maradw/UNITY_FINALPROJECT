@@ -136,15 +136,15 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("a");
         }
-        
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.tag == "Damage")
+        if (other.tag == "Damage")
         {
             Restlife(6);
         }
 
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
     private void Restlife(int damage)
     {

@@ -25,6 +25,10 @@ public class ParabolicEnemy : MonoBehaviour
             _startShooting = true;
             Debug.Log("a");
         }
+        if (other.tag == "Ground" && other.tag == "Player")
+        {
+            Destroy(ball);
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -37,6 +41,7 @@ public class ParabolicEnemy : MonoBehaviour
     public void Shoot()
     {
         Instantiate(ball, transform.position, transform.rotation).Launch(_playerReference);
+       
     }
     IEnumerator StartShoot()
     {
