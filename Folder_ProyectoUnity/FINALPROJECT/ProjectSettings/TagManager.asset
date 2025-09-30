@@ -6,11 +6,21 @@ TagManager:
   tags:
   - Conteiner
   - Portal
+  - Green
+  - Red
+  - Blue
+  - Yellow
+  - ChozuyaTalk
+  - Book
+  - Damage
+  - Pin
+  - Ground
+  - Node
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - bridges
   - Water
   - UI
   - 

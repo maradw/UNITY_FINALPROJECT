@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public int _recolectedBooks = 0;
     public static GameManager Instance { get; private set; }
     private void Awake()
     {
@@ -15,14 +16,44 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+           // DontDestroyOnLoad(this.gameObject);
         }
-    }
-
-    void Update()
-    {
+        
         
     }
+    private void Start()
+    {
+
+    }
+    void OnEnable()
+    {
+        PlayerController.OnPlayerGather += Recolecction;
+       // PlayerController.OnPlayerDamage += Damage;
+    }
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerGather -= Recolecction;
+        //PlayerController.OnPlayerDamage -= Damage;
+    }
+    void Update()
+    {
+        //Recolecction();
+        if(_recolectedBooks == 6)
+        {
+            Debug.Log(" win");
+            ChangeScene("Menu");
+        }
+
+        
+    }
+    void Recolecction()
+    {
+        _recolectedBooks++;
+    }
+   /* void Damage(int damage)
+    {
+        _lifePlayer -= damage;
+    }*/
     public void ChangeScene( string sceneName)
     {
         SceneManager.LoadScene(sceneName);
