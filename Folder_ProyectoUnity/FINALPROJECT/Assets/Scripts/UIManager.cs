@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-       // DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);
         _audioMenu.SetActive(false);
         _creditsBar.SetActive(false);
     }
@@ -66,8 +66,17 @@ public class UIManager : MonoBehaviour
         _menuButtons.SetActive(true);
 
     }
+    /*public void ShowPauseMenu()
+    {
+
+    }
+    public void HidePauseMenu()
+    {
+
+    }*/
     public void Back(GameObject gameBar)
     {
+
         gameBar.SetActive(false);
     }
     public void Show(GameObject gameBar)

@@ -15,7 +15,7 @@ public class ParabolicLaunch : MonoBehaviour
 	{
 		Physics.gravity = Vector3.up * gravity;
 		ball.useGravity = true;
-		ball.velocity = CalculateLaunchData(target).initialVelocity;
+		ball.linearVelocity = CalculateLaunchData(target).initialVelocity;
 	}
 
 	LaunchData CalculateLaunchData(Transform target)

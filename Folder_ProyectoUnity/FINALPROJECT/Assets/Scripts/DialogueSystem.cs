@@ -9,7 +9,7 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField] private GameObject _dialogueBar;
     public string[] dialogueText;
     public float timeBetween = 0.15f;
-    // Start is called before the first frame update
+    
     private void Awake()
     {
        // DontDestroyOnLoad(this.gameObject);

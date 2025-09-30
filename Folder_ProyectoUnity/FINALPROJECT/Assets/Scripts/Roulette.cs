@@ -63,7 +63,7 @@ public class Roulette : MonoBehaviour
     {
         StartCoroutine(HideAndPass());
     }
-     public void Continue(string scene)
+    public void Continue(string scene)
     {
         GameManager.Instance.ChangeScene("Main game");
     }
